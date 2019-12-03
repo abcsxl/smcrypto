@@ -58,11 +58,11 @@ namespace smcrypto
             this.sm3keybase = new SM3Digest();
             this.sm3c3 = new SM3Digest();
 
-            byte[] p = byteConvert32Bytes(p2.AffineXCoord.ToBigInteger());
+            byte[] p = byteConvert32Bytes(p2.Normalize().XCoord.ToBigInteger());
             this.sm3keybase.BlockUpdate(p, 0, p.Length);
             this.sm3c3.BlockUpdate(p, 0, p.Length);
 
-            p = byteConvert32Bytes(p2.AffineYCoord.ToBigInteger());
+            p = byteConvert32Bytes(p2.Normalize().YCoord.ToBigInteger());
             this.sm3keybase.BlockUpdate(p, 0, p.Length);
             this.ct = 1;
             NextKey();
@@ -127,7 +127,7 @@ namespace smcrypto
 
         public void Dofinal(byte[] c3)
         {
-            byte[] p = byteConvert32Bytes(p2.AffineYCoord.ToBigInteger());
+            byte[] p = byteConvert32Bytes(p2.Normalize().YCoord.ToBigInteger());
             this.sm3c3.BlockUpdate(p, 0, p.Length);
             this.sm3c3.DoFinal(c3, 0);
             Reset();
