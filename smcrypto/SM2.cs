@@ -59,9 +59,6 @@ namespace smcrypto
         {
             ecc_param = sm2_param;
 
-            ECFieldElement ecc_gx_fieldelement;
-            ECFieldElement ecc_gy_fieldelement;
-
             ecc_p = new BigInteger(ecc_param[0], 16);
             ecc_a = new BigInteger(ecc_param[1], 16);
             ecc_b = new BigInteger(ecc_param[2], 16);
@@ -69,12 +66,8 @@ namespace smcrypto
             ecc_gx = new BigInteger(ecc_param[4], 16);
             ecc_gy = new BigInteger(ecc_param[5], 16);
 
-
-            ecc_gx_fieldelement = new FpFieldElement(ecc_p, ecc_gx);
-            ecc_gy_fieldelement = new FpFieldElement(ecc_p, ecc_gy);
-
-            ecc_curve = new FpCurve(ecc_p, ecc_a, ecc_b);
-            ecc_point_g = new FpPoint(ecc_curve, ecc_gx_fieldelement, ecc_gy_fieldelement);
+            ecc_curve = new FpCurve(ecc_p, ecc_a, ecc_b, null, null);
+            ecc_point_g = ecc_curve.CreatePoint(ecc_gx, ecc_gy);
 
             ecc_bc_spec = new ECDomainParameters(ecc_curve, ecc_point_g, ecc_n);
 
