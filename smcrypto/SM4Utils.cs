@@ -10,7 +10,6 @@ namespace smcrypto
         public String secretKey = "";
         public String iv = "";
         public bool hexString = false;
-        public byte[] secretKeyBuff;
 
         public String Encrypt_ECB(String plainText)
         {
